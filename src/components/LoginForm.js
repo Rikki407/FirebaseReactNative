@@ -1,13 +1,13 @@
-import React, {Component} from 'react';
-import { View } from 'react-native';
+import React, { Component } from 'react';
+import { View, TextInput } from 'react-native';
 import { Button, Card, CardSection } from './common';
 
-class LoginForm extends Component{
-    render(){
-        return(
+class LoginForm extends Component {
+    render() {
+        return (
             <Card>
                 <CardSection>
-
+                    <TextInput style={{ height: 20, width: 100 }} />
                 </CardSection>
                 <CardSection>
 
@@ -21,5 +21,6 @@ class LoginForm extends Component{
         );
     }
 }
+
 
 export default LoginForm;
