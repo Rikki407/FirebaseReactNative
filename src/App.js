@@ -5,6 +5,7 @@ import { Header } from './components/common';
 import LoginForm from './components/LoginForm';
 
 class App extends Component {
+    state = { loggedIn: false };
     componentWillMount() {
         firebase.initializeApp({
             apiKey: 'AIzaSyDeJW3JZ8uO9qXhmfRLMgpv0L5im2C8O1I',
@@ -15,10 +16,18 @@ class App extends Component {
             messagingSenderId: '649849654853'
           }
         );
+
+        firebase.auth().onAuthStateChanged((user) => {
+            if (user) {
+                this.setState({ loggedIn: true });
+            } else {
+                this.setState({ loggedIn: false });
+            }
+        });
     }
 
     render() {
-        return(
+        return (
             <View>
                 <Header headerText="Rikki Auth" />
                 <LoginForm />
