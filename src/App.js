@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { View } from 'react-native';
 import firebase from 'firebase';
-import { Header } from './components/common';
+import { Header, Button, Spinner, CardSection } from './components/common';
 import LoginForm from './components/LoginForm';
 
 class App extends Component {
-    state = { loggedIn: false };
+    state = { loggedIn: null };
     componentWillMount() {
         firebase.initializeApp({
             apiKey: 'AIzaSyDeJW3JZ8uO9qXhmfRLMgpv0L5im2C8O1I',
@@ -26,11 +26,22 @@ class App extends Component {
         });
     }
 
+    renderContent() {
+        switch (this.state.loggedIn) {
+            case true:
+               return <CardSection><Button>Log Out</Button></CardSection>;
+            case false:
+                return <LoginForm />;
+            default:
+                return <View style={{ alignSelf: 'center' }}><Spinner size='large' /></View>;
+        }
+    }
+
     render() {
         return (
             <View>
                 <Header headerText="Rikki Auth" />
-                <LoginForm />
+                {this.renderContent()}
             </View>
         );
     }
